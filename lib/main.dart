@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:flutter/foundation.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -84,19 +86,27 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         ResolutionPreset.medium
     );
     await _controller.initialize();
+
+    final faceDetector = FirebaseVision.instance.faceDetector();
+    //List<Face> faces = await faceDetector.processImage(image);
+
     _controller.startImageStream((CameraImage image) {
-      if (_isDetecting) return;
-      _isDetecting = true;
-      try {
-        print(_isDetecting);
-        // await doOpenCVDectionHere(image)
-      } catch (e) {
-        print(_isDetecting);
-          //await handleExepction(e);
-      } finally {
-        _isDetecting = false;
+      if (_isDetecting) {
+        //Future<List<Face>> faces = faceDetector.processImage(image);
+        return;
       }
-    });
+        _isDetecting = true;
+        try {
+          print(_isDetecting);
+          // await doOpenCVDectionHere(image)
+        } catch (e) {
+          print(_isDetecting);
+          //await handleExepction(e);
+        } finally {
+          _isDetecting = false;
+        }
+      }
+    );
   }
 
   @override
