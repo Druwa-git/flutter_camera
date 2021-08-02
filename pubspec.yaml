@@ -23,11 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  camera:
-  path_provider:
-  path:
-  firebase_core: ^1.4.0
-  firebase_ml_vision: ^0.12.0+2
+  google_ml_kit: ^0.7.0
+    # When depending on this package from a real application you should use:
+    #   google_ml_kit: ^x.y.z
+    # See https://dart.dev/tools/pub/dependencies#version-constraints
+    # The example app is bundled with the plugin so we use a path dependency on
+    # the parent directory to use the current plugin's version.
+  image_picker: ^0.7.2
+  camera: ^0.8.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
